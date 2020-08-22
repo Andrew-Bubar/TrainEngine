@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Runtime.Remoting.Messaging;
 
 namespace TrainEngine.TrainEngine
 {
@@ -25,6 +26,16 @@ namespace TrainEngine.TrainEngine
 
             Log.Info( $"[SPRITE2D] ({Tag})  -  Has been Made " ); TrainEngine.GetSprites2D( this ); 
         }
+
+        public bool IsColliding(Sprite2D a, Sprite2D b )
+        {
+            if(a.Position.x <= b.Position.x &&
+                a.Scale.x >= b.Scale.x &&
+                a.Position.y <= b.Position.y &&
+                a.Scale.y >= b.Scale.y ) { return true; }
+
+            return false;
+        } 
 
         public void DestroySelf () { TrainEngine.UngetSprites2D( this ); Log.Info( $"[SPRITE2D] ({Tag})  -  Has been removed " ); }
     }

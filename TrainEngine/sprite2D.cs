@@ -27,12 +27,19 @@ namespace TrainEngine.TrainEngine
             Log.Info( $"[SPRITE2D] ({Tag})  -  Has been Made " ); TrainEngine.GetSprites2D( this ); 
         }
 
-        public bool IsColliding(Sprite2D a, Sprite2D b )
+        public bool IsColliding(string tag)
         {
-            if(a.Position.x <= b.Position.x &&
-                a.Scale.x >= b.Scale.x &&
-                a.Position.y <= b.Position.y &&
-                a.Scale.y >= b.Scale.y ) { return true; }
+            foreach (Sprite2D b in TrainEngine.AllSprites)
+            {
+                if (b.Tag == tag)
+                {
+                    if (Position.x < b.Position.x + b.Scale.x && Position.x + Scale.x > b.Position.x &&
+                        Position.y < b.Position.y + b.Scale.y && Position.y + Scale.y > b.Position.y)
+                    {
+                        return true;
+                    }
+                }
+            }
 
             return false;
         } 

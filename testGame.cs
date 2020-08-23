@@ -38,7 +38,7 @@ namespace TrainEngine
             
 
             player = new Sprite2D( new vector( 10, 10 ), new vector( 56, 56 ), "Enemies/png/64x64/Spike_Up", "player");
-            player2 = new Sprite2D( new vector( 100, 100 ), new vector( 56, 56 ), "Enemies/png/64x64/Spike_Up", "player" );
+            player2 = new Sprite2D( new vector( 100, 100 ), new vector( 56, 56 ), "Enemies/png/64x64/Spike_Up", "player2" );
 
             for (int i = 0; i < map.GetLength(1); i++ ) {
 
@@ -73,7 +73,10 @@ namespace TrainEngine
                 player.Position.x += 1f;
             }
 
-            if (player.IsColliding(player, player2)) ;
+            if (player.IsColliding("player2"))
+            {
+                Log.Info("Player collision works");
+            }
         }
 
         public override void GetKeyDown ( KeyEventArgs Input ) {

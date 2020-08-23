@@ -20,7 +20,7 @@ namespace TrainEngine
         bool down;
 
         Sprite2D player;
-        Sprite2D player2;
+        private vector lastPos = vector.zero();
 
         string[,] map = {
             
@@ -38,7 +38,6 @@ namespace TrainEngine
             
 
             player = new Sprite2D( new vector( 10, 10 ), new vector( 56, 56 ), "Enemies/png/64x64/Spike_Up", "player");
-            player2 = new Sprite2D( new vector( 100, 100 ), new vector( 56, 56 ), "Enemies/png/64x64/Spike_Up", "player2" );
 
             for (int i = 0; i < map.GetLength(1); i++ ) {
 
@@ -73,9 +72,15 @@ namespace TrainEngine
                 player.Position.x += 1f;
             }
 
-            if (player.IsColliding("player2"))
+            if (player.IsColliding("ground"))
             {
-                Log.Info("Player collision works");
+                player.Position.x = lastPos.x;
+                player.Position.y = lastPos.y;
+            }
+            else
+            {
+                lastPos.x = player.Position.x;
+                lastPos.y = player.Position.y;
             }
         }
 
